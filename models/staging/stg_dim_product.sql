@@ -88,10 +88,71 @@ WITH dim_product_source AS (
     ,list_price
   FROM dim_product_rename 
 )
+,dim_product_underfined_record as (
+    SELECT 
+        product_id,
+        product_name,
+        product_number,
+        make_flag,
+        finished_goods_flag,
+        product_subcategory_id,
+        product_model_id,
+        size_unit_measure_id,
+        weight_unit_measure_id,
+        color,
+        weight,
+        size,
+        safety_stock_level,
+        standard_cost,
+        list_price 
+    FROM dim_product_handle_null
 
+    UNION ALL 
 
+    SELECT 
+       0 as product_id,
+       'Undefined' as product_name,
+       'Undefined' as product_number,
+       0 as make_flag,
+       0 as finished_goods_flag,
+       '0' as product_subcategory_id,
+       '0' as product_model_id,
+       'Undefined' as size_unit_measure_id,
+       'Undefined' as weight_unit_measure_id,
+       'Undefined' as color,
+       'Undefined' as weight,
+       'Undefined' as size,
+       0 as safety_stock_level,
+       0.0 as standard_cost,
+       0.0 as list_price
+)
+,dim_product_type AS (
+    SELECT
+         product_id
+        ,product_name
+        ,product_number
+        ,CASE
+            WHEN make_flag = 1 THEN 'in house'
+            ELSE 'manufactured in-house'
+         END as make_flag
+        ,CASE
+            WHEN finished_goods_flag = 1 THEN 'salable'
+            ELSE 'Not a salable'
+        END as finished_goods_flag
+        ,product_subcategory_id
+        ,product_model_id
+        ,size_unit_measure_id
+        ,weight_unit_measure_id
+        ,color
+        ,weight
+        ,size
+        ,safety_stock_level
+        ,standard_cost
+        ,list_price 
+    FROM dim_product_underfined_record
+)
 SELECT 
-        product_id
+         product_id
         ,product_name
         ,product_number
         ,make_flag
@@ -106,4 +167,4 @@ SELECT
         ,safety_stock_level
         ,standard_cost
         ,list_price 
-FROM dim_product_handle_null
+FROM dim_product_type
