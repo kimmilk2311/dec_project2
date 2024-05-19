@@ -34,10 +34,6 @@ WITH dim_customer_source AS (
        customer_id,
        person_id,
        store_id,
-       CASE 
-         WHEN store_id IS NOT NULL THEN 'reseller'
-         ELSE 'customer'
-       END AS is_reseller
     FROM dim_customer_cast_type
 
     UNION ALL
@@ -46,10 +42,21 @@ WITH dim_customer_source AS (
        0 AS customer_id,
        0 AS person_id,
        0 AS store_id,
-       'Undefined' AS is_reseller
+)
+,dim_customer_type AS (
+    SELECT
+       customer_id,
+       person_id,
+       store_id,
+       CASE
+           WHEN store_id IS NOT NULL THEN 'reseller'
+           ELSE 'customer'
+       END AS is_reseller
+    FROM dim_customer_undefined_record
 )
 SELECT
-   customer_id
-   ,person_id
-   ,is_reseller
-FROM dim_customer_undefined_record
+   customer_id,
+   person_id,
+   store_id,
+   is_reseller
+FROM dim_customer_type

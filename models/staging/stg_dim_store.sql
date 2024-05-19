@@ -37,5 +37,5 @@ SELECT
 SELECT
     store_id
     ,store_name
-    ,sales_person_id
+    ,sales_person_id 
 FROM dim_store_add_underfined_record
