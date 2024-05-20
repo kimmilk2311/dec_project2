@@ -1,7 +1,7 @@
 SELECT
     dim_customer.customer_id
     ,dim_customer.is_reseller
-    ,dim_store.store_id
+    ,dim_customer.store_id
     ,dim_store.store_name
     ,dim_person.person_title
     ,dim_person.person_first_name

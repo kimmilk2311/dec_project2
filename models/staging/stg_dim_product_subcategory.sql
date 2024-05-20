@@ -13,7 +13,7 @@ WITH dim_product_subcategory_source AS (
 
 ,dim_product_subcategory_cast_type AS (
     SELECT
-        CAST(product_subcategory_id as integer) as product_subcategory_id
+        CAST(product_subcategory_id as string) as product_subcategory_id
         ,CAST(product_category_id as integer) as product_category_id
         ,CAST(product_subcategory_name as string) as product_subcategory_name
     FROM dim_product_subcategory_rename
@@ -29,7 +29,7 @@ WITH dim_product_subcategory_source AS (
     UNION ALL
 
     SELECT 
-        0 AS product_subcategory_id
+         '0' AS product_subcategory_id
         ,0 AS product_category_id
         ,'Undefined' AS product_subcategory_name
 )

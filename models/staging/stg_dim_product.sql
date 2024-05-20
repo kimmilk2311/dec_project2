@@ -28,8 +28,8 @@ WITH dim_product_source AS (
         CAST(product_id as integer) as product_id
         ,CAST(product_name as string) as product_name
         ,CAST(product_number as string ) as product_number
-        ,CAST(make_flag as integer) as make_flag
-        ,CAST(finished_goods_flag as integer) as finished_goods_flag
+        ,CAST(make_flag as string) as make_flag
+        ,CAST(finished_goods_flag as string) as finished_goods_flag
         ,CAST(product_subcategory_id as string) as product_subcategory_id
         ,CAST(product_model_id as string) as product_model_id
         ,CAST(size_unit_measure_id as string) as size_unit_measure_id
@@ -115,8 +115,8 @@ WITH dim_product_source AS (
        'Undefined' as product_number,
        0 as make_flag,
        0 as finished_goods_flag,
-       '0' as product_subcategory_id,
-       '0' as product_model_id,
+       'Undefined' as product_subcategory_id,
+       'Undefined' as product_model_id,
        'Undefined' as size_unit_measure_id,
        'Undefined' as weight_unit_measure_id,
        'Undefined' as color,
