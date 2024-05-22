@@ -18,12 +18,3 @@ FROM
     {{ref("stg_dim_sales_order_detail")}} as fact_sales
     LEFT JOIN {{ref("stg_dim_sales_oder_header")}} as fact_sales_oder_header
         ON fact_sales.sales_order_id = fact_sales_oder_header.sales_order_id
-    LEFT JOIN {{ref("dim_product")}} as dim_product
-        ON fact_sales.product_id = dim_product.product_id
-    LEFT JOIN {{ref("dim_customer")}} as dim_customer
-        ON fact_sales_oder_header.customer_id = dim_customer.customer_id
-    LEFT JOIN {{ref("dim_sales_territory")}} as dim_sales_territory
-        ON fact_sales_oder_header.sales_territory_id = dim_sales_territory.territory_id
-    LEFT JOIN {{ref("dim_sales_person")}} as dim_sales_person
-        ON fact_sales_oder_header.sales_person_id = dim_sales_person.sales_person_id
-    
