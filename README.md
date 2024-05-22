@@ -1,4 +1,4 @@
-Hi my name is Kimmilk
+Hi my nick name is Kimmilk
 
 This is project use dbt tranform data 
 
